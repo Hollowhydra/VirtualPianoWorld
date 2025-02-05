@@ -1,10 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const keyMap = {
-        '1': 'C', '!': 'C#', '2': 'D', '@': 'D#', '3': 'E', '4': 'F', '$': 'F#', '5': 'G', '%': 'G#', '6': 'A', '^': 'A#', '7': 'B',
-        '8': 'C2', '*': 'C#2', '9': 'D2', '(': 'D#2', '0': 'E2', 'q': 'F2', 'Q': 'F#2', 'w': 'G2', 'W': 'G#2', 'e': 'A2', 'E': 'A#2',
-        'r': 'B2', 't': 'C3', 'T': 'C#3', 'y': 'D3', 'Y': 'D#3', 'u': 'E3', 'i': 'F3', 'I': 'F#3', 'o': 'G3', 'O': 'G#3', 'p': 'A3', 'P': 'A#3',
-        'a': 'B3', 's': 'C4', 'S': 'C#4', 'd': 'D4', 'D': 'D#4', 'f': 'E4', 'g': 'F4', 'G': 'F#4', 'h': 'G4', 'H': 'G#4', 'j': 'A4', 'J': 'A#4',
-        'k': 'B4', 'l': 'C5', 'L': 'C#5', 'z': 'D5', 'Z': 'D#5', 'x': 'E5', 'c': 'F5', 'C': 'F#5', 'v': 'G5', 'V': 'G#5', 'b': 'A5', 'B': 'A#5',
+        '1': 'C', 'Shift+1': 'C#', '2': 'D', 'Shift+2': 'D#', '3': 'E', '4': 'F', 'Shift+4': 'F#', 
+        '5': 'G', 'Shift+5': 'G#', '6': 'A', 'Shift+6': 'A#', '7': 'B',
+        '8': 'C2', 'Shift+8': 'C#2', '9': 'D2', 'Shift+9': 'D#2', '0': 'E2', 
+        'q': 'F2', 'Shift+q': 'F#2', 'w': 'G2', 'Shift+w': 'G#2', 'e': 'A2', 'Shift+e': 'A#2',
+        'r': 'B2', 't': 'C3', 'Shift+t': 'C#3', 'y': 'D3', 'Shift+y': 'D#3', 'u': 'E3', 
+        'i': 'F3', 'Shift+i': 'F#3', 'o': 'G3', 'Shift+o': 'G#3', 'p': 'A3', 'Shift+p': 'A#3',
+        'a': 'B3', 's': 'C4', 'Shift+s': 'C#4', 'd': 'D4', 'Shift+d': 'D#4', 'f': 'E4', 
+        'g': 'F4', 'Shift+g': 'F#4', 'h': 'G4', 'Shift+h': 'G#4', 'j': 'A4', 'Shift+j': 'A#4',
+        'k': 'B4', 'l': 'C5', 'Shift+l': 'C#5', 'z': 'D5', 'Shift+z': 'D#5', 'x': 'E5', 
+        'c': 'F5', 'Shift+c': 'F#5', 'v': 'G5', 'Shift+v': 'G#5', 'b': 'A5', 'Shift+b': 'A#5',
         'n': 'B5', 'm': 'C6'
     };
 
@@ -20,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Label the key with the QWERTY character at the bottom
         const label = document.createElement("span");
-        label.innerText = qwertyKey;
+        label.innerText = qwertyKey.replace("Shift+", ""); // Display without "Shift+"
         key.appendChild(label);
 
         // Click event
@@ -33,11 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("keydown", (event) => {
-        if (keyElements[event.key]) pressKey(event.key);
+        let key = event.key;
+        if (event.shiftKey) key = `Shift+${key}`;
+        if (keyElements[key]) pressKey(key);
     });
 
     document.addEventListener("keyup", (event) => {
-        if (keyElements[event.key]) releaseKey(event.key);
+        let key = event.key;
+        if (event.shiftKey) key = `Shift+${key}`;
+        if (keyElements[key]) releaseKey(key);
     });
 
     function pressKey(qwertyKey) {
