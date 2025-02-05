@@ -9,37 +9,51 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const piano = document.getElementById("piano");
+    const keyElements = {};
 
-    // Create UI keys dynamically
-    const notes = Object.values(keyMap);
-    const whiteKeys = notes.filter(note => !note.includes("#"));
-    const blackKeys = notes.filter(note => note.includes("#"));
-
-    whiteKeys.forEach(note => {
+    // Generate piano keys
+    Object.entries(keyMap).forEach(([qwertyKey, note]) => {
         const key = document.createElement("div");
-        key.className = "key";
-        key.innerText = note;
+        key.className = `key ${note.includes("#") ? "black" : ""}`;
         key.dataset.note = note;
-        key.addEventListener("click", () => playSound(note));
-        piano.appendChild(key);
-    });
+        key.dataset.qwerty = qwertyKey;
 
-    blackKeys.forEach(note => {
-        const key = document.createElement("div");
-        key.className = "key black";
-        key.innerText = note;
-        key.dataset.note = note;
-        key.addEventListener("click", () => playSound(note));
+        // Label the key with the QWERTY character at the bottom
+        const label = document.createElement("span");
+        label.innerText = qwertyKey;
+        key.appendChild(label);
+
+        // Click event
+        key.addEventListener("mousedown", () => pressKey(qwertyKey));
+        key.addEventListener("mouseup", () => releaseKey(qwertyKey));
+        key.addEventListener("mouseleave", () => releaseKey(qwertyKey));
+
         piano.appendChild(key);
+        keyElements[qwertyKey] = key;
     });
 
     document.addEventListener("keydown", (event) => {
-        const note = keyMap[event.key];
-        if (note) playSound(note);
+        if (keyElements[event.key]) pressKey(event.key);
     });
 
+    document.addEventListener("keyup", (event) => {
+        if (keyElements[event.key]) releaseKey(event.key);
+    });
+
+    function pressKey(qwertyKey) {
+        if (!keyElements[qwertyKey]) return;
+        keyElements[qwertyKey].classList.add("pressed");
+        playSound(keyMap[qwertyKey]);
+    }
+
+    function releaseKey(qwertyKey) {
+        if (keyElements[qwertyKey]) {
+            keyElements[qwertyKey].classList.remove("pressed");
+        }
+    }
+
     function playSound(note) {
-        let audio = new Audio(`https://piano-sounds.com/${note}.mp3`);
-        audio.play();
+        let audio = new Audio(`sounds/${note}.mp3`);
+        audio.play().catch(err => console.warn(`Error playing ${note}:`, err));
     }
 });
