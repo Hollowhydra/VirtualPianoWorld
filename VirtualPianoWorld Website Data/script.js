@@ -8,23 +8,38 @@ document.addEventListener("DOMContentLoaded", () => {
         'n': 'B5', 'm': 'C6'
     };
 
-    const audioCache = {};
+    const piano = document.getElementById("piano");
+
+    // Create UI keys dynamically
+    const notes = Object.values(keyMap);
+    const whiteKeys = notes.filter(note => !note.includes("#"));
+    const blackKeys = notes.filter(note => note.includes("#"));
+
+    whiteKeys.forEach(note => {
+        const key = document.createElement("div");
+        key.className = "key";
+        key.innerText = note;
+        key.dataset.note = note;
+        key.addEventListener("click", () => playSound(note));
+        piano.appendChild(key);
+    });
+
+    blackKeys.forEach(note => {
+        const key = document.createElement("div");
+        key.className = "key black";
+        key.innerText = note;
+        key.dataset.note = note;
+        key.addEventListener("click", () => playSound(note));
+        piano.appendChild(key);
+    });
 
     document.addEventListener("keydown", (event) => {
-        event.preventDefault(); // Prevent default key actions
-
         const note = keyMap[event.key];
-        if (note) {
-            playSound(note);
-        }
+        if (note) playSound(note);
     });
 
     function playSound(note) {
-        if (!audioCache[note]) {
-            audioCache[note] = new Audio(`https://piano-sounds.com/${note}.mp3`);
-        }
-
-        const audio = audioCache[note].cloneNode(); // Clone to allow overlapping sounds
-        audio.play().catch(err => console.warn(`Error playing ${note}:`, err));
+        let audio = new Audio(`https://piano-sounds.com/${note}.mp3`);
+        audio.play();
     }
 });
