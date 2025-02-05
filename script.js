@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
         key.dataset.note = note;
         key.dataset.qwerty = qwertyKey;
 
-        // Label at the bottom of the key
+        // Corrected labels: White keys get lowercase labels, Black keys get uppercase
         const label = document.createElement("span");
-        label.innerText = qwertyKey;
+        label.innerText = note.includes("#") ? `[${qwertyKey}]` : qwertyKey;
         key.appendChild(label);
 
         if (note.includes("#")) {
@@ -44,9 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Place black keys correctly over white keys
-    blackKeys.forEach(({ key, qwertyKey }, index) => {
-        const offset = (index * 40) + 30;
+    const whiteKeyWidth = 40;
+    blackKeys.forEach(({ key, qwertyKey }) => {
+        const whiteKeyIndex = Object.keys(keyMap).indexOf(qwertyKey) - 1;
+        const offset = (whiteKeyIndex * whiteKeyWidth) + (whiteKeyWidth * 0.65);
+        key.style.position = "absolute";
         key.style.left = `${offset}px`;
+        key.style.marginLeft = "-15px";
         piano.appendChild(key);
     });
 
