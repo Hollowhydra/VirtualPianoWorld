@@ -1,72 +1,36 @@
-/* Reset default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Basic page layout */
-body {
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-/* Header styles */
-header {
-    background: #333;
-    color: white;
-    padding: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-/* Piano container */
-#piano-container {
-    margin: 30px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-}
-
 #piano {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 50px;
 }
 
-/* Piano key styles */
 .piano-key {
-    width: 50px;
-    height: 150px;
-    margin: 5px;
-    background: white;
-    border: 2px solid black;
-    display: inline-flex;
-    justify-content: center;
-    align-items: flex-end;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
+    width: 30px;
+    height: 120px;
+    margin: 0 2px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .piano-key.active {
-    background: lightgray;
+    background-color: #ccc;
+}
+
+.piano-key.highlighted {
+    background-color: yellow;
+    transform: scale(1.1);
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+/* Optional: Add styles for black keys */
+.piano-key.black {
+    width: 20px;
+    height: 80px;
+    background-color: black;
+    position: absolute;
+    left: 20px;
+    z-index: 2;
 }
