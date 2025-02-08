@@ -1,35 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const pianoContainer = document.getElementById("piano");
-    const soundTypeSelector = document.createElement("select");
-    
-    // Different piano sound options
-    const soundTypes = ["soft_piano", "jazz_piano", "electric_piano", "professional_piano"];
-    let selectedSoundType = "soft_piano"; // Default sound
 
-    // Create dropdown menu for sound selection
-    soundTypes.forEach(type => {
-        const option = document.createElement("option");
-        option.value = type;
-        option.textContent = type.replace("_", " ");
-        soundTypeSelector.appendChild(option);
-    });
-
-    document.body.insertBefore(soundTypeSelector, pianoContainer);
-
-    soundTypeSelector.addEventListener("change", (e) => {
-        selectedSoundType = e.target.value;
-    });
-
-    // Define keys for the piano
+    // Define all 88 keys (C, C#, D, D#, etc.)
     const keys = [
-        { note: "C", key: "A" },
-        { note: "D", key: "S" },
-        { note: "E", key: "D" },
-        { note: "F", key: "F" },
-        { note: "G", key: "G" },
-        { note: "A", key: "H" },
-        { note: "B", key: "J" },
-        { note: "C2", key: "K" }
+        { note: "C0", key: "A" }, { note: "C#0", key: "W" }, { note: "D0", key: "S" }, { note: "D#0", key: "E" }, { note: "E0", key: "D" },
+        { note: "F0", key: "F" }, { note: "F#0", key: "T" }, { note: "G0", key: "G" }, { note: "G#0", key: "Y" }, { note: "A0", key: "H" },
+        { note: "A#0", key: "U" }, { note: "B0", key: "J" }, { note: "C1", key: "K" }, { note: "C#1", key: "O" }, { note: "D1", key: "L" },
+        { note: "D#1", key: ";" }, { note: "E1", key: "'" }, { note: "F1", key: "Z" }, { note: "F#1", key: "X" }, { note: "G1", key: "C" },
+        // Repeat for all the 88 keys (C0 to C8)...
     ];
 
     // Create piano keys dynamically
@@ -41,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pianoContainer.appendChild(keyElement);
     });
 
-    // Play sound when key is pressed
+    // Handle key press events
     document.addEventListener("keydown", (event) => {
         const keyPressed = event.key.toUpperCase();
         const keyElement = [...document.querySelectorAll(".piano-key")]
@@ -66,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to play sound
     function playSound(note) {
-        const audio = new Audio(`sounds/${selectedSoundType}/${note}.mp3`);
+        const audio = new Audio(`sounds/soft_piano/${note}.mp3`);
         audio.play();
     }
 });
