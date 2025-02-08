@@ -1,8 +1,26 @@
-// Wait until the page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     const pianoContainer = document.getElementById("piano");
+    const soundTypeSelector = document.createElement("select");
+    
+    // Different piano sound options
+    const soundTypes = ["soft_piano", "jazz_piano", "electric_piano", "professional_piano"];
+    let selectedSoundType = "soft_piano"; // Default sound
 
-    // Define the keys for the virtual piano
+    // Create dropdown menu for sound selection
+    soundTypes.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type.replace("_", " ");
+        soundTypeSelector.appendChild(option);
+    });
+
+    document.body.insertBefore(soundTypeSelector, pianoContainer);
+
+    soundTypeSelector.addEventListener("change", (e) => {
+        selectedSoundType = e.target.value;
+    });
+
+    // Define keys for the piano
     const keys = [
         { note: "C", key: "A" },
         { note: "D", key: "S" },
@@ -23,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pianoContainer.appendChild(keyElement);
     });
 
-    // Event listener for key presses
+    // Play sound when key is pressed
     document.addEventListener("keydown", (event) => {
         const keyPressed = event.key.toUpperCase();
         const keyElement = [...document.querySelectorAll(".piano-key")]
@@ -46,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Function to play sound (to be implemented)
+    // Function to play sound
     function playSound(note) {
-        console.log("Playing note:", note);
-        // We will add actual sound files in the next step
+        const audio = new Audio(`sounds/${selectedSoundType}/${note}.mp3`);
+        audio.play();
     }
 });
