@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const whiteKeys = [];
     const blackKeys = [];
 
-    // Generate piano keys
+    // keys
     Object.entries(keyMap).forEach(([qwertyKey, note]) => {
         const key = document.createElement("div");
         key.className = `key ${note.includes("#") ? "black" : ""}`;
         key.dataset.note = note;
         key.dataset.qwerty = qwertyKey;
 
-        // Corrected labels: White keys get lowercase labels, Black keys get uppercase
+        // problem here, work on it
         const label = document.createElement("span");
         label.innerText = note.includes("#") ? `[${qwertyKey}]` : qwertyKey;
         key.appendChild(label);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             whiteKeys.push({ key, qwertyKey });
         }
 
-        // Click and release events
+        // piano Click effect
         key.addEventListener("mousedown", () => pressKey(qwertyKey));
         key.addEventListener("mouseup", () => releaseKey(qwertyKey));
         key.addEventListener("mouseleave", () => releaseKey(qwertyKey));
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         keyElements[qwertyKey] = key;
     });
 
-    // Place black keys correctly over white keys
+    // black keys still arnt set right, needs fixed
     const whiteKeyWidth = 40;
     blackKeys.forEach(({ key, qwertyKey }) => {
         const whiteKeyIndex = Object.keys(keyMap).indexOf(qwertyKey) - 1;
