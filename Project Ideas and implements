@@ -1,0 +1,29 @@
+ // 1. Virtual Piano Functionality:
+- Implement a virtual piano using the QWERTY layout for keyboard input.
+- Ensure that the piano keys produce the correct sound when pressed.
+- Include features such as octave selection, sustain pedal simulation, and volume control.
+- Implement a feature that provides real-time visualizations of music being played on the virtual piano.(multiple different styles)
+2. Chat System:
+- Integrate a chat system that allows players to communicate with each other in real-time.
+- Implement features like message history, user mentions, and private messaging.
+
+3. Multiplayer Functionality:
+- Enable multiplayer functionality to allow multiple users to play the virtual piano simultaneously.
+- Implement synchronization of piano key presses across all connected users.
+
+4. User Identification and Ban System:
+- Assign random user IDs to players for identification purposes. (IDs max length 9 letters and numbers)
+- Implement a ban system that allows administrators to ban users who violate website rules.
+- Make a anti console plan (like reddit where you can't input use the console to force inputs to admin and member roles)
+- make a admin icon/tag to show who is a admin and give funny and serious commands like ban, or make me rainbow commands etc..
+
+5. User Customization:
+- Include a function to change user names (not IDs) and user colors.
+- Display user colors when they interact with the piano keys.
+- Add a feature that allows users to customize the virtual piano's appearance with different themes and skins.
+
+6. Music Sheet library:
+- Make a search function to find sheets in the website
+- Make a place where sheets can be stored so users can find or search them
+- Make a ui pop up above the piano with the sheet the user clicked on
+- Make the sheet Ui scrollable so if the sheet is too big to be seen fully the user can scroll down and continue the sheet they are playing
