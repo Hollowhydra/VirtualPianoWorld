@@ -4,27 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Piano</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Virtual Piano</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Piano</a></li>
-                <li><a href="#">Chat</a></li>
-                <li><a href="#">Sheets</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="piano"></div>
 
-    <main>
-        <section id="piano-container">
-            <h2>Play the Piano</h2>
-            <div id="piano"></div>
-        </section>
-    </main>
+    <!-- Chat system (Optional) -->
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="chat-input" placeholder="Type a message..." />
+    </div>
 
     <script src="script.js"></script>
 </body>
